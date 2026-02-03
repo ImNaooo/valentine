@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Alveera, veux-tu être ma Valentine ? </title>
+  <style>
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Arial', sans-serif;
+      background: #000;
+      overflow: hidden;
+    }
+
+    .carousel {
+      position: fixed;
+      inset: 0;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      padding: 10px;
+      z-index: 0;
+    }
+
+    .slide {
+      background-size: cover;
+      background-position: center;
+      border-radius: 20px;
+      filter: brightness(0.7);
+      transition: background-image 1s ease-in-out;
+    }
+
+    .card {
+      position: relative;
+      z-index: 2;
+      background: rgba(255,255,255,0.95);
+      padding: 2.5rem 2rem;
+      border-radius: 20px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+      text-align: center;
+      max-width: 400px;
+      width: 90%;
+      animation: pop 0.8s ease;
+    }
+
+    @keyframes pop {
+      from { transform: scale(0.8); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    h1 {
+      color: #ff4d6d;
+      margin-bottom: 1rem;
+    }
+
+    p {
+      font-size: 1.1rem;
+      margin-bottom: 2rem;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    button {
+      padding: 0.8rem 1.5rem;
+      font-size: 1rem;
+      border: none;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+    }
+
+    .yes {
+      background: #ff4d6d;
+      color: white;
+    }
+
+    .no {
+      background: #f1f1f1;
+      color: #555;
+      position: relative;
+    }
+
+    .result {
+      margin-top: 1.5rem;
+      font-size: 1.2rem;
+      color: #ff4d6d;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="carousel">
+    <div class="slide"></div>
+    <div class="slide"></div>
+    <div class="slide"></div>
+  </div>
+  <div class="card">
+    <h1>🚨⚠️ Question très importante ⚠️🚨</h1>
+    <p>Alveera, veux-tu être<br><strong>ma Valentine</strong> ?</p>
+
+    <div class="buttons">
+      <button class="yes" onclick="sayYes()">Bilkul BAABE</button>
+      <button class="no" onmouseover="moveNo()">Nahi (tum mujhe nafrat karte ho?) </button>
+    </div>
+
+    <div class="result" id="result">🥰 Merci BAAAAAABE, rendez-vous le 14 🤭</div>
+  </div>
+
+  <script>
+    const photos = [
+      'photos/photo1.jpg',
+      'photos/photo2.jpg',
+      'photos/photo3.jpg',
+      'photos/photo4.jpg',
+      'photos/photo5.jpg',
+      'photos/photo6.jpg',
+      'photos/photo7.jpg',
+      'photos/photo8.jpg',
+      'photos/photo9.jpg',
+      'photos/photo10.jpg',
+      'photos/photo11.jpg',
+      'photos/photo12.jpg'
+    ];
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const slides = document.querySelectorAll('.slide');
+
+      function updateCarousel() {
+        const shuffled = [...photos].sort(() => Math.random() - 0.5);
+        slides.forEach((slide, i) => {
+          slide.style.backgroundImage = `url('${shuffled[i]}')`;
+        });
+      }
+
+      updateCarousel();
+      setInterval(updateCarousel, 4000);
+    });
+
+    function sayYes() {
+      document.getElementById('result').style.display = 'block';
+    }
+
+    function moveNo() {
+      const btn = document.querySelector('.no');
+      const x = Math.random() * 200 - 100;
+      const y = Math.random() * 200 - 100;
+      btn.style.transform = `translate(${x}px, ${y}px)`;
+    }
+  </script>
+</body>
+</html>
